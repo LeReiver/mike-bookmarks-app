@@ -11,9 +11,25 @@
 </head>
 <body>
   <div class="container">
-      <header>
-        <h1>My Bookmarks</h1>
-      </header>
+    <header>
+      <h1>My Bookmarks</h1>
+      <form>
+        <button class="header-button js-header-button">ADD BOOKMARK</button>
+        <select class="header-select js-header-select">
+          <option>Minimum Rating</option>
+          <option>5 stars</option>
+          <option>4 stars</option>
+          <option>3 stars</option>
+          <option>2 stars</option>
+          <option>1 star</option>
+        </select>
+      </form>
+    </header>
+    <main class='bookmark-panel js-bookmark-panel'>
+      <ul class='bookmark-list js-bookmark-list'>
+        <li class='bookmark-list-items js-bookmark-list-items'></li>
+      </ul>
+    </main>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="scripts/api.js"></script> 

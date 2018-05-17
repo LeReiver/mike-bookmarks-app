@@ -6,13 +6,36 @@ body {
   font-family: 'Geneva', sans-serif;
 }
 
-button, input[type="text"] {
+header {
+  display: inline-block;
+  padding: 10px;
+}
+
+h1 {
+  margin-left: 10px;
+  float:left;
+}
+
+header form {
+  margin: 25px 0 0 25px;
+  float: left;
+}
+
+button {
+  height: 35px;
   padding: 5px;
-  border-radius: 10;
+  border-radius: 7px;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+select {
+  height: 35px;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .hidden {
@@ -21,8 +44,10 @@ button:hover {
 
 .container {
   max-width: 600px;
+  min-width: 280px;
   height: 400px;
-  margin: 0 auto;
-  background-color: rgb(196, 189, 189);
+  margin: 100px auto;
+  background-color: #eee;
   border: solid 4px #999;
+  border-radius: 10px;
 }
