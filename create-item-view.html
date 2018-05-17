@@ -14,7 +14,7 @@
     <header>
       <h1>My Bookmarks</h1>
       <form>
-        <button class="header-button js-header-button">ADD BOOKMARK</button>
+        <button class="header-button js-header-button">CREATE BOOKMARK</button>
         <select class="header-select js-header-select">
           <option>Filter by Rating</option>
           <option>5 stars</option>
@@ -24,16 +24,46 @@
           <option>1 star</option>
         </select>
       </form>
-  </header>
-      <a href="create-item-view.html">to add bookmark</a>
-      <a href="expanded-item-view.html">expand bookmark</a>
+    </header>
+    <a href="index.html">to home view</a>
     <main class="bookmark-panel js-bookmark-panel">
       <ul class="bookmark-list js-bookmark-list">
+          <li class="create-bookmark-view js-create-bookmark-view">
+            <h2>Create a Bookmark</h2>
+            <form action="#" id="add-bookmark">
+              <input class="add-bookmark-title js-add-bookmark-title" type="text" placeholder="title">
+              <input class="add-bookmark-link js-add-bookmark-link" type="text" placeholder="http://address.com"> 
+              <input class="add-bookmark-desc js-add-bookmark-desc" type="text" placeholder="longer description here">
+              <div action"#" id="add-star-rating js-add-star-rating">
+                <p>Rate</p>
+                <div class="rate-radio-button js-rate-radio-buttons">
+                  <input type="radio" id="5-stars"
+                   name="rate" value="5">
+                  <label for="4-stars">5 STARS</label>
+                  <input type="radio" id="4-stars"
+                   name="rate" value="5">
+                  <label for="4-stars">4 STARS</label>
+                  <input type="radio" id="3-stars"
+                   name="rate" value="3">
+                  <label for="3-stars">3 STARS</label>
+                  <input type="radio" id="2-stars"
+                   name="rate" value="2">
+                  <label for="2-stars">2 STARS</label>
+                  <input type="radio" id="1-star"
+                   name="rate" value="1">
+                  <label for="1-star">1 STARS</label>
+                </div>
+                <div>
+                  <button class="add-button-submit js-add-button-submit" type="submit">ADD</button>
+                </div>
+              </div>
+            </form>
+          </li>
         <li class="bookmark-list-items js-bookmark-list-items">
           <h3 class="list-title js-list-title">MDN Web Docs</h3>
           <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/">https://developer.mozilla.org/en-US/</a>
           <section class="star-rating js-star-rating">
-            <p class="star-number js-star-number">5 STARS</p>
+            <p class="star-number js-star-number">3 STARS</p>
           </section>
         </li>
         <li class="bookmark-list-items js-bookmark-list-items">
@@ -47,7 +77,7 @@
           <h3 class="list-title js-list-title">MDN Web Docs</h3>
           <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/">https://developer.mozilla.org/en-US/</a>
           <section class="star-rating js-star-rating">
-            <p class="star-number js-star-number">4 STARS</p>
+            <p class="star-number js-star-number">3 STARS</p>
           </section>
         </li>
       </ul>
