@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Geneva', sans-serif;
+}
+
+button, input[type="text"] {
+  padding: 5px;
+  border-radius: 10;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  max-width: 600px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: rgb(196, 189, 189);
+  border: solid 4px #999;
+}
