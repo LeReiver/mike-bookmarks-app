@@ -128,3 +128,44 @@ select:hover {
 .add-button-submit {
   margin-bottom: 20px;
 }
+
+
+.expand-bookmark-view {
+  padding: 8px;
+  clear: left;
+  width: 95%;
+  min-width: 200px;
+  height: fit-content;
+  margin: 8px auto;
+  background-color: white;
+  border: solid 2px #999;
+  border-radius: 10px;
+}
+
+p.expanded-stars {
+  float: right;
+  margin-top: -18px;
+  padding-right: 20px;
+}
+
+.long-desc, 
+.visit-site-button, 
+.delete-bookmark-button {
+  margin: 15px;
+}
+
+a.bookmark-link {
+  padding: 8px;
+  margin-top: 20px;
+  word-wrap: none;
+}
+.visit-site-button {
+  width: 40%;
+}
+
+.delete-bookmark-button {
+  float: right;
+  width: 40%;
+  margin-top: -50px;
+}
+
