@@ -17,7 +17,7 @@ h1 {
 }
 
 header form {
-  margin: 25px 0 0 25px;
+  margin: 20px 0 0 25px;
   float: left;
 }
 
@@ -45,9 +45,40 @@ select {
 .container {
   max-width: 600px;
   min-width: 280px;
-  height: 400px;
+  height: fit-content;
   margin: 100px auto;
   background-color: #eee;
   border: solid 4px #999;
   border-radius: 10px;
+}
+
+.bookmark-panel {
+  margin-bottom: 20px;
+}
+
+.bookmark-list-items {
+  clear: left;
+  max-width: 400px;
+  min-width: 200px;
+  height: fit-content;
+  margin: 8px auto;
+  background-color: white;
+  border: solid 2px #999;
+  border-radius: 10px;
+}
+
+.list-title, .list-link, .star-rating{
+  padding: 8px;
+}
+
+.list-title {
+
+}
+
+.list-link {
+
+}
+
+.star-rating {
+
 }
