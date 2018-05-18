@@ -2,22 +2,22 @@
 
 const api = (function() {
   
-  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/mikelr';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/mikelr2';
 
   const getItems = function(callback) {
     $.getJSON(BASE_URL + '/bookmarks', callback);
   };
 
   const createItem = function(id, title, url, desc, rating, callback, onError) {
-    console.log(' Add was clicked');
+    console.log(' Add was clicked. Adding bookmark!');
     const newItem = JSON.stringify(
-      {'id': id,
-        'title': title,
-        'url': url,
-        'desc': desc,
-        'rating': rating
+      {id: id,
+        title: title,
+        url: url,
+        desc: desc,
+        rating: rating
       });
-      console.log(newItem);
+    console.log(newItem);
 
     $.ajax({
       url: BASE_URL + '/bookmarks',

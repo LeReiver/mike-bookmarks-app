@@ -32,7 +32,7 @@
     <ul class="bookmark-list js-bookmark-list">
         <li class="create-bookmark-view js-create-bookmark-view">
           <h2>Create a Bookmark</h2>
-          <form action="#" id="add-bookmark">
+          <form action="#" id="js-add-bookmark">
             <label for="add-bookmark-title"></label>
             <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" type="text" placeholder="title">
             <label for="add-bookmark-desc"></label>
@@ -40,7 +40,7 @@
             <label for="add-bookmark-link"></label>
             <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" type="text" placeholder="http://address.com">
             <div>
-              <button class="add-button-submit js-add-button-submit" onclick="api.createItem()" type="submit">ADD</button>
+              <button class="add-button-submit js-add-button-submit" type="submit">ADD</button>
             </div>
             <div action"#" id="add-star-rating js-add-star-rating">
               <div class="rate-radio-button js-rate-radio-buttons">
@@ -77,6 +77,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="scripts/api.js"></script> 
   <script src="scripts/store.js"></script> 
+  <script src="scripts/bookmark-list.js"></script> 
   <script src="scripts/index.js"></script>  
 </body>
 </html>

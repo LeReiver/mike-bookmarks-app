@@ -14,8 +14,9 @@
 $(document).ready(function() {
 
 
-  api.getItems((items) => {
-    items.forEach((item) => store.addItem(item));
-    //bookmarkList.render();
-  });
+  // api.getItems((items) => {
+  //   //console.log(store);
+  //   items.forEach((item) => store.addItem(item));
+  //   //bookmarkList.render();
+  // });
 });

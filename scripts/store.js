@@ -35,6 +35,7 @@ const store = (function() {
 
   return {
     items: [],
+    adding: false,
     error: null,
 
     addItem,
