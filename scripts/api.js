@@ -8,17 +8,16 @@ const api = (function() {
     $.getJSON(BASE_URL + '/bookmarks', callback);
   };
 
-  const createItem = function(id, title, url, desc, rating, callback, onError) {
+  const createItem = function(title, url, desc, rating, callback, onError) {
     console.log(' Add was clicked. Adding bookmark!');
     const newItem = JSON.stringify(
-      {id: id,
+      {
         title: title,
         url: url,
         desc: desc,
         rating: rating
       });
-    console.log(newItem);
-
+      
     $.ajax({
       url: BASE_URL + '/bookmarks',
       method: 'POST',

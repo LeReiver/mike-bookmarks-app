@@ -7,7 +7,7 @@ const bookmarkList = (function() {
     console.log('Generating Bookmark element ran');
     return `
       <li class="bookmark-list-items js-bookmark-list-items" data-item-id="${item.id}">
-      <h3 class="list-title js-list-title">${item.name}</h3>
+      <h3 class="list-title js-list-title">${item.title}</h3>
       <a class="list-link js-list-link" href="${item.url}" target="_blank">${item.url}</a>
       <section class="star-rating js-star-rating">
         <p class="star-number js-star-number">${item.rating}</p>
@@ -20,32 +20,24 @@ const bookmarkList = (function() {
     return items.join('');
   }
 
-  function generateExpandedView(item){
+/*   function generateExpandedView(item){
     console.log('Generating Expanded view ran');
     return `
       <li class="expand-bookmark-view js-expand-bookmark-view">
-        <h2>Article Title</h2>
-        <p class="expanded-stars js-expanded-stars">5 STARS</p>
-        <p class="long-desc js-long-desc">
-            Another very common task in modern websites and applications is 
-            retrieving individual data items from the server to update sections 
-            of a webpage without having to load an entire new page. This seemingly 
-            small detail has had a huge impact on the performance and behavior of 
-            sites, so in this article we'll explain the concept and look at 
-            technologies that make it possible, such as XMLHttpRequest and the Fetch API.
-        </p>
-        <a class="bookmark-link js-bookmark-link" href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data" target="_blank">
-          https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data
-        </a>
+        <h2>${item.title}</h2>
+        <p class="expanded-stars js-expanded-stars">${item.rating}</p>
+        <p class="long-desc js-long-desc">${item.desc}</p>
+        <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">${item.url}</a>
         <div>
-            <a class="bookmark-link js-bookmark-link" href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data" target="_blank">
+            <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">
             <button class="visit-site-button js-visit-site-button" type="submit">VISIT</button></a>
         </div>
         <div id="js-delete-bookmark">
           <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">DELETE</button>
         </div>
       </li>`;
-  }
+  } 
+*/
 
   function generateCreateBookmarkView() {
     console.log('Generating Create Bookmark element ran');
@@ -54,12 +46,12 @@ const bookmarkList = (function() {
       <h2>Create a Bookmark</h2>
       <form id="js-add-bookmark">
         <label for="add-bookmark-title"></label>
-        <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" "type="text" placeholder="title">
+        <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title">
         <label for="add-bookmark-desc"></label>
-        <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" type="text" placeholder="longer description here">
+        <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="longer description here">
         <label for="add-bookmark-link"></label>
-        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" type="text"placeholder="http://url-address.com">
-        <div action"#" id="add-star-rating js-add-star-rating">
+        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="text"placeholder="http://url-address.com">
+        <div id="add-star-rating js-add-star-rating">
           <div class="rate-radio-button js-rate-radio-buttons">
             <Legend>STARS</Legend>
             <input type="radio" id="5-stars"
@@ -107,12 +99,18 @@ const bookmarkList = (function() {
       console.log('`handleAddBookmarkClicked` ran');
       //console.log(event);
       event.preventDefault();
-      //console.log(event.target);
-      const data = $(event.target).serializeJson();
-      api.createItem(data);
-      store.addItem(data);
-      store.adding = false;
-      render();
+      //console.log(event.currentTarget.elements);
+      const title = event.currentTarget.title.value;
+      const url = event.currentTarget.url.value;
+      const desc = event.currentTarget.desc.value;
+      const rate = event.currentTarget.rate.value;
+
+      api.createItem(title, url, desc, rate, function(response) {
+        console.log(response);
+        store.addItem(response);
+        store.adding = false;
+        render();
+      });
     }));
   }
 
@@ -120,8 +118,8 @@ const bookmarkList = (function() {
   function handleExpandViewClicked() {
     $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
       console.log('`handleExpandViewClicked` ran');
-      generateExpandedView();
-    // render();
+      store.expanded = true;
+      render();
     });
   }
 
@@ -154,23 +152,6 @@ const bookmarkList = (function() {
       .data('item-id');
   }
 
-  function serializeJson(form) {
-    const formData = new FormData(form);
-    const o = {};
-    formData.forEach((val, name) => o[name] = val);
-    return JSON.stringify(o);
-  }
-
-  $.fn.extend({
-    serializeJson: function() {
-      const formData = new FormData(this[0]);
-      const o = {};
-      formData.forEach((val, name) => o[name] = val);
-      return JSON.stringify(o);
-    }
-  });
-  
-
 
   function render() {
     console.log('`render` ran');
@@ -181,7 +162,13 @@ const bookmarkList = (function() {
       $('.js-bookmark-list').append(bookmarkForm);
     }
 
+    if(store.expaned) {
+      const expandView = generateExpandedView();
+      $('.js-bookmark-list').append(expandView);
+    }
+
     handleAddBookmarkClicked();
+
 
 
     //get current items
