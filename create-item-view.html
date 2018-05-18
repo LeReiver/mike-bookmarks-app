@@ -31,15 +31,18 @@
           <li class="create-bookmark-view js-create-bookmark-view">
             <h2>Create a Bookmark</h2>
             <form action="#" id="add-bookmark">
-              <input class="add-bookmark-title js-add-bookmark-title" type="text" placeholder="title">
-              <input class="add-bookmark-desc js-add-bookmark-desc" type="text" placeholder="longer description here">
-              <input class="add-bookmark-link js-add-bookmark-link" type="text" placeholder="http://address.com">
+              <label for="add-bookmark-title"></label>
+              <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" type="text" placeholder="title">
+              <label for="add-bookmark-desc"></label>
+              <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" type="text" placeholder="longer description here">
+              <label for="add-bookmark-link"></label>
+              <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" type="text" placeholder="http://address.com">
               <div>
-                <button class="add-button-submit js-add-button-submit" type="submit">ADD</button>
+                <button class="add-button-submit js-add-button-submit" onclick="api.createItem('33333','JS', 'http://this.com', 'this this this this', 5)" type="submit">ADD</button>
               </div>
               <div action"#" id="add-star-rating js-add-star-rating">
                 <div class="rate-radio-button js-rate-radio-buttons">
-                  <p>STARS</p>
+                  <Legend>STARS</Legend>
                   <input type="radio" id="5-stars"
                    name="rate" value="5">
                   <label for="4-stars">5</label>
@@ -59,20 +62,6 @@
               </div>
             </form>
           </li>
-        <li class="bookmark-list-items js-bookmark-list-items">
-          <h3 class="list-title js-list-title">MDN Web Docs</h3>
-          <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>
-          <section class="star-rating js-star-rating">
-            <p class="star-number js-star-number">3 STARS</p>
-          </section>
-        </li>
-        <li class="bookmark-list-items js-bookmark-list-items">
-          <h3 class="list-title js-list-title">MDN Web Docs</h3>
-          <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>
-          <section class="star-rating js-star-rating">
-            <p class="star-number js-star-number">3 STARS</p>
-          </section>
-        </li>
         <li class="bookmark-list-items js-bookmark-list-items">
           <h3 class="list-title js-list-title">MDN Web Docs</h3>
           <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>

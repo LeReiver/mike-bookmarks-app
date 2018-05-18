@@ -11,43 +11,29 @@
 </head>
 <body>
   <div class="container">
-    <header>
+    <header role="banner">
       <h1>My Bookmarks</h1>
       <form>
         <button class="header-button js-header-button">CREATE BOOKMARK</button>
-        <select class="header-select js-header-select">
-          <option>Filter by Rating</option>
-          <option>5 stars</option>
-          <option>4 stars</option>
-          <option>3 stars</option>
-          <option>2 stars</option>
-          <option>1 star</option>
+        <select role="select" class="header-select js-header-select">
+          <option role="option">Filter by Rating</option>
+          <option role="option">5 stars</option>
+          <option role="option">4 stars</option>
+          <option role="option">3 stars</option>
+          <option role="option">2 stars</option>
+          <option role="option">1 star</option>
         </select>
       </form>
   </header>
       <a href="create-item-view.html">to add bookmark</a>
       <a href="expanded-item-view.html">expand bookmark</a>
-    <main class="bookmark-panel js-bookmark-panel">
+    <main role="main" class="bookmark-panel js-bookmark-panel">
       <ul class="bookmark-list js-bookmark-list">
         <li class="bookmark-list-items js-bookmark-list-items">
           <h3 class="list-title js-list-title">MDN Web Docs</h3>
           <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>
-          <section class="star-rating js-star-rating">
+          <section role="section" class="star-rating js-star-rating">
             <p class="star-number js-star-number">5 STARS</p>
-          </section>
-        </li>
-        <li class="bookmark-list-items js-bookmark-list-items">
-          <h3 class="list-title js-list-title">MDN Web Docs</h3>
-          <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>
-          <section class="star-rating js-star-rating">
-            <p class="star-number js-star-number">3 STARS</p>
-          </section>
-        </li>
-        <li class="bookmark-list-items js-bookmark-list-items">
-          <h3 class="list-title js-list-title">MDN Web Docs</h3>
-          <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>
-          <section class="star-rating js-star-rating">
-            <p class="star-number js-star-number">4 STARS</p>
           </section>
         </li>
       </ul>
