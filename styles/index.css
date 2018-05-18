@@ -27,9 +27,15 @@ button {
   border-radius: 7px;
 }
 
+input[type=submit] {
+  height: 35px;
+  padding: 5px;
+  border-radius: 7px;
+  float: left;
+}
+
 select {
   height: 35px;
-  margin-left: 10px;
   padding: 10px;
   border-radius: 5px;
 }
@@ -46,6 +52,9 @@ select {
   background-color: #eee;
   border: solid 4px #999;
   border-radius: 10px;
+}
+form#js-header-select, form#js-header-button {
+  float: left;
 }
 
 .bookmark-panel {

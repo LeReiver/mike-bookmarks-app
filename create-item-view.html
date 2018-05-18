@@ -13,8 +13,10 @@
   <div class="container">
     <header>
       <h1>My Bookmarks</h1>
-      <form>
-        <button class="header-button js-header-button">CREATE BOOKMARK</button>
+      <form id="js-create-bookmark-form">
+        <button class="header-button js-header-button" type="submit">CREATE BOOKMARK</button>
+      </form>
+      <form id="js-filter-bookmark-form">
         <select class="header-select js-header-select">
           <option>Filter by Rating</option>
           <option>5 stars</option>
@@ -27,41 +29,41 @@
     </header>
     <a href="index.html">to home view</a>
     <main class="bookmark-panel js-bookmark-panel">
-      <ul class="bookmark-list js-bookmark-list">
-          <li class="create-bookmark-view js-create-bookmark-view">
-            <h2>Create a Bookmark</h2>
-            <form action="#" id="add-bookmark">
-              <label for="add-bookmark-title"></label>
-              <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" type="text" placeholder="title">
-              <label for="add-bookmark-desc"></label>
-              <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" type="text" placeholder="longer description here">
-              <label for="add-bookmark-link"></label>
-              <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" type="text" placeholder="http://address.com">
-              <div>
-                <button class="add-button-submit js-add-button-submit" onclick="api.createItem('33333','JS', 'http://this.com', 'this this this this', 5)" type="submit">ADD</button>
+    <ul class="bookmark-list js-bookmark-list">
+        <li class="create-bookmark-view js-create-bookmark-view">
+          <h2>Create a Bookmark</h2>
+          <form action="#" id="add-bookmark">
+            <label for="add-bookmark-title"></label>
+            <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" type="text" placeholder="title">
+            <label for="add-bookmark-desc"></label>
+            <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" type="text" placeholder="longer description here">
+            <label for="add-bookmark-link"></label>
+            <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" type="text" placeholder="http://address.com">
+            <div>
+              <button class="add-button-submit js-add-button-submit" onclick="api.createItem()" type="submit">ADD</button>
+            </div>
+            <div action"#" id="add-star-rating js-add-star-rating">
+              <div class="rate-radio-button js-rate-radio-buttons">
+                <Legend>STARS</Legend>
+                <input type="radio" id="5-stars"
+                  name="rate" value="5">
+                <label for="4-stars">5</label>
+                <input type="radio" id="4-stars"
+                  name="rate" value="5">
+                <label for="4-stars">4</label>
+                <input type="radio" id="3-stars"
+                  name="rate" value="3">
+                <label for="3-stars">3</label>
+                <input type="radio" id="2-stars"
+                  name="rate" value="2">
+                <label for="2-stars">2</label>
+                <input type="radio" id="1-star"
+                  name="rate" value="1">
+                <label for="1-star">1</label>
               </div>
-              <div action"#" id="add-star-rating js-add-star-rating">
-                <div class="rate-radio-button js-rate-radio-buttons">
-                  <Legend>STARS</Legend>
-                  <input type="radio" id="5-stars"
-                   name="rate" value="5">
-                  <label for="4-stars">5</label>
-                  <input type="radio" id="4-stars"
-                   name="rate" value="5">
-                  <label for="4-stars">4</label>
-                  <input type="radio" id="3-stars"
-                   name="rate" value="3">
-                  <label for="3-stars">3</label>
-                  <input type="radio" id="2-stars"
-                   name="rate" value="2">
-                  <label for="2-stars">2</label>
-                  <input type="radio" id="1-star"
-                   name="rate" value="1">
-                  <label for="1-star">1</label>
-                </div>
-              </div>
-            </form>
-          </li>
+            </div>
+          </form>
+        </li>
         <li class="bookmark-list-items js-bookmark-list-items">
           <h3 class="list-title js-list-title">MDN Web Docs</h3>
           <a class="list-link js-list-link" href="https://developer.mozilla.org/en-US/" target="_blank">https://developer.mozilla.org/en-US/</a>

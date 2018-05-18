@@ -8,8 +8,8 @@ const api = (function() {
     $.getJSON(BASE_URL + '/bookmarks', callback);
   };
 
-  const createItem = function(id, title, url, desc, rating, onSuccess, onError) {
-    console.log('was clicked');
+  const createItem = function(id, title, url, desc, rating, callback, onError) {
+    console.log(' Add was clicked');
     const newItem = JSON.stringify(
       {'id': id,
         'title': title,
@@ -24,7 +24,7 @@ const api = (function() {
       method: 'POST',
       contentType: 'application/json',
       data: newItem,
-      success: onSuccess,
+      success: callback,
       error: onError,
     });
   };

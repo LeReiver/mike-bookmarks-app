@@ -13,8 +13,10 @@
   <div class="container">
     <header role="banner">
       <h1>My Bookmarks</h1>
-      <form>
-        <button class="header-button js-header-button">CREATE BOOKMARK</button>
+      <form id="js-create-bookmark-form">
+        <input role="button" class="header-button js-header-button" type="submit" value="CREATE BOOKMARK"></input>
+      </form>
+      <form id="js-filter-bookmark-form">
         <select role="select" class="header-select js-header-select">
           <option role="option">Filter by Rating</option>
           <option role="option">5 stars</option>
@@ -42,6 +44,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="scripts/api.js"></script> 
   <script src="scripts/store.js"></script> 
+  <script src="scripts/bookmark-list.js"></script> 
   <script src="scripts/index.js"></script>  
 </body>
 </html>
