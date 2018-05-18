@@ -4,7 +4,6 @@
 const bookmarkList = (function() {
 
   function generateBookmarkElement(item) {
-    console.log('Generating Bookmark element ran');
     return `
       <li class="bookmark-list-items js-bookmark-list-items" data-item-id="${item.id}">
       <h3 class="list-title js-list-title">${item.title}</h3>
@@ -20,27 +19,26 @@ const bookmarkList = (function() {
     return items.join('');
   }
 
-/*   function generateExpandedView(item){
+  function generateExpandedView(item){
     console.log('Generating Expanded view ran');
     return `
-      <li class="expand-bookmark-view js-expand-bookmark-view">
-        <h2>${item.title}</h2>
-        <p class="expanded-stars js-expanded-stars">${item.rating}</p>
-        <p class="long-desc js-long-desc">${item.desc}</p>
-        <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">${item.url}</a>
-        <div>
-            <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">
-            <button class="visit-site-button js-visit-site-button" type="submit">VISIT</button></a>
-        </div>
-        <div id="js-delete-bookmark">
-          <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">DELETE</button>
-        </div>
-      </li>`;
+    <li class="expand-bookmark-view js-expand-bookmark-view">
+      <h2>${item.title}</h2>
+      <p class="expanded-stars js-expanded-stars">${item.rating}</p>
+      <p class="long-desc js-long-desc">${item.desc}</p>
+      <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">${item.url}</a>
+      <div>
+          <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">
+          <button class="visit-site-button js-visit-site-button" type="submit">VISIT</button></a>
+      </div>
+      <div id="js-delete-bookmark">
+        <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">DELETE</button>
+      </div>
+    </li>`;
   } 
-*/
 
+ 
   function generateCreateBookmarkView() {
-    console.log('Generating Create Bookmark element ran');
     return `
       <li class="create-bookmark-view js-create-bookmark-view">
       <h2>Create a Bookmark</h2>
@@ -78,7 +76,7 @@ const bookmarkList = (function() {
     </li>`;
   }
 
-
+// TODO
   function filterByRating() {
     
   }
@@ -86,7 +84,6 @@ const bookmarkList = (function() {
 
   function handleCreateBookmarkClicked() {
     $('#js-create-bookmark-form').on('submit', (function(event) {
-      console.log('`handleCreateBookmarkClicked` ran');
       event.preventDefault();
       store.adding = true;
       render();
@@ -96,17 +93,13 @@ const bookmarkList = (function() {
 
   function handleAddBookmarkClicked() {
     $('#js-add-bookmark').on('submit', (function(event) {
-      console.log('`handleAddBookmarkClicked` ran');
-      //console.log(event);
       event.preventDefault();
-      //console.log(event.currentTarget.elements);
       const title = event.currentTarget.title.value;
       const url = event.currentTarget.url.value;
       const desc = event.currentTarget.desc.value;
       const rate = event.currentTarget.rate.value;
 
       api.createItem(title, url, desc, rate, function(response) {
-        console.log(response);
         store.addItem(response);
         store.adding = false;
         render();
@@ -117,7 +110,8 @@ const bookmarkList = (function() {
 
   function handleExpandViewClicked() {
     $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
-      console.log('`handleExpandViewClicked` ran');
+      const id = getItemIdFromElement(event.currentTarget);
+      console.log(id);
       store.expanded = true;
       render();
     });
@@ -126,11 +120,10 @@ const bookmarkList = (function() {
 
   function handleDeleteBookmarkClicked() {
     $('.js-delete-bookmark').on('click', 'js-bookmark-list-item', event => {
-      console.log('`handleDeleteBookmarkClicked` ran');
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteItem(id, () => {
         store.findAndDelete(id);
-      //  render();
+    // render();
       });
     });
   }
@@ -138,7 +131,6 @@ const bookmarkList = (function() {
 
   function handleFilterByRatingClicked() {
     $('#js-filter-bookmark-form').on('change', function(event) {
-      console.log('`handleFilterByRatingClicked` ran');
       event.preventDefault();
       const val = $(event.currentTarget).val();
       filterByRating(val);
@@ -154,7 +146,6 @@ const bookmarkList = (function() {
 
 
   function render() {
-    console.log('`render` ran');
     $('.js-bookmark-list').empty();
    
     if(store.adding) {
@@ -183,14 +174,16 @@ const bookmarkList = (function() {
 
   }
 
-  function main() {
+  function bindEventListeners() {
     handleExpandViewClicked();
     handleDeleteBookmarkClicked();
     handleCreateBookmarkClicked();
     handleFilterByRatingClicked();
   }
 
-  main();
-
+  return {
+    bindEventListeners,
+    render
+  };
 
 }());

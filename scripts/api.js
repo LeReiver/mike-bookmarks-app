@@ -9,7 +9,6 @@ const api = (function() {
   };
 
   const createItem = function(title, url, desc, rating, callback, onError) {
-    console.log(' Add was clicked. Adding bookmark!');
     const newItem = JSON.stringify(
       {
         title: title,
@@ -17,7 +16,7 @@ const api = (function() {
         desc: desc,
         rating: rating
       });
-      
+
     $.ajax({
       url: BASE_URL + '/bookmarks',
       method: 'POST',
