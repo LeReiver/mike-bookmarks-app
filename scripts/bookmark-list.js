@@ -76,12 +76,6 @@ const bookmarkList = (function() {
     </li>`;
   }
 
-// TODO
-  function filterByRating() {
-    
-  }
-
-
   function handleCreateBookmarkClicked() {
     $('#js-create-bookmark-form').on('submit', (function(event) {
       event.preventDefault();
@@ -130,10 +124,11 @@ const bookmarkList = (function() {
 
 
   function handleFilterByRatingClicked() {
-    $('#js-filter-bookmark-form').on('change', function(event) {
+    $('.js-header-select').on('change', function(event) {
       event.preventDefault();
       const val = $(event.currentTarget).val();
-      filterByRating(val);
+      console.log(val);
+      store.filterByRating(parseInt(val[0]));
       render();
     });
   }

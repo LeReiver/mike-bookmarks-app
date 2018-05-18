@@ -14,6 +14,13 @@ const store = (function() {
     this.items = this.items.filter(item => item.id !== id);
   };
 
+
+  function filterByRating(val) {
+    this.items = this.items.filter( itm => {
+      return itm.rating >= val;
+    });
+  }
+
   return {
     items: [],
     adding: false,
@@ -21,7 +28,8 @@ const store = (function() {
 
     addItem,
     findById,
-    findAndDelete
+    findAndDelete, 
+    filterByRating
   };
   
 }());
