@@ -150,10 +150,24 @@ select:hover {
   border-radius: 10px;
 }
 
-p.expanded-stars {
+.header-right {
   float: right;
+}
+p.expanded-stars {
+  margin-top: -10px;
+  margin-right: 10px;
+  float: left;
+}
+
+.close-button {
   margin-top: -18px;
-  padding-right: 20px;
+  float: left;
+}
+
+.close-header-right {
+  margin-top: -28px;
+  margin-right: 10px;
+  float: right;
 }
 
 .long-desc, 

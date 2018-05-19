@@ -1,4 +1,4 @@
-/* global store api */
+/* global store api $ */
 'use strict';
 
 const bookmarkList = (function() {
@@ -9,7 +9,7 @@ const bookmarkList = (function() {
       <h3 class="list-title js-list-title">${item.title}</h3>
       <a class="list-link js-list-link" href="${item.url}" target="_blank">${item.url}</a>
       <section class="star-rating js-star-rating">
-        <p class="star-number js-star-number">${item.rating}</p>
+        <p class="star-number js-star-number">${item.rating} STARS</p>
       </section>
     </li>`;
   }
@@ -24,16 +24,19 @@ const bookmarkList = (function() {
     return `
     <li class="expand-bookmark-view js-expand-bookmark-view">
       <h2>${item.title}</h2>
-      <p class="expanded-stars js-expanded-stars">${item.rating}</p>
+      <form id="js-close-expanded" class="header-right js-header-right">
+        <p class="expanded-stars js-expanded-stars">${item.rating} STARS</p>
+        <button class="close-button js-close-button" type="submit">Close</button>
+      </form>
       <p class="long-desc js-long-desc">${item.desc}</p>
       <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">${item.url}</a>
-      <div>
+      <div> 
           <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">
-          <button class="visit-site-button js-visit-site-button" type="submit">VISIT</button></a>
+          <button class="visit-site-button js-visit-site-button">VISIT</button></a>
       </div>
-      <div id="js-delete-bookmark">
+      <form id="js-delete-bookmark">
         <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">DELETE</button>
-      </div>
+      </form>
     </li>`;
   } 
 
@@ -42,18 +45,21 @@ const bookmarkList = (function() {
     return `
       <li class="create-bookmark-view js-create-bookmark-view">
       <h2>Create a Bookmark</h2>
+      <form id="js-close-expanded" class="close-header-right js-header-right">
+        <button class="create-close-button js-close-button" type="submit">Close</button>
+      </form>
       <form id="js-add-bookmark">
         <label for="add-bookmark-title"></label>
-        <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title">
+        <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title" required>
         <label for="add-bookmark-desc"></label>
         <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="longer description here">
         <label for="add-bookmark-link"></label>
-        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="text"placeholder="http://url-address.com">
+        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="text"placeholder="http://url-address.com" requried>
         <div id="add-star-rating js-add-star-rating">
-          <div class="rate-radio-button js-rate-radio-buttons">
-            <Legend>STARS</Legend>
+          <div class="rate-radio-button js-rate-radio-buttons" >
+            <Legend required>STARS</Legend>
             <input type="radio" id="5-stars"
-              name="rate" value="5">
+              name="rate" value="5" required>
             <label for="4-stars">5</label>
             <input type="radio" id="4-stars"
               name="rate" value="5">
@@ -85,6 +91,22 @@ const bookmarkList = (function() {
   }
 
 
+  function handleCloseBookmarkClicked() {
+    $('#js-close-expanded').on('click', '.js-bookmark-list-item', event => {
+      event.preventDefault();
+      console.log(getItemIdFromElement(event.currentTarget));
+      const id = getItemIdFromElement(event.currentTarget);
+      console.log(id);
+      let item = store.findById(id);
+      store.closing = true;
+      if (store.closing && item.id === id) {
+        render();
+        store.closing = false;
+      }
+    });
+  }
+
+
   function handleAddBookmarkClicked() {
     $('#js-add-bookmark').on('submit', (function(event) {
       event.preventDefault();
@@ -105,20 +127,35 @@ const bookmarkList = (function() {
   function handleExpandViewClicked() {
     $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      console.log(id);
+      let item = store.findById(id);
       store.expanded = true;
-      render();
+      if (store.expanded && item.id === id) {
+        const expandView = generateExpandedView(item);
+        expandView;
+        if(store.expanded) {
+          $('.js-bookmark-list').prepend(expandView);
+        }
+      }
     });
   }
 
 
   function handleDeleteBookmarkClicked() {
-    $('.js-delete-bookmark').on('click', 'js-bookmark-list-item', event => {
+    $('#js-delete-bookmark').on('submit', '.js-bookmark-list-item', event => {
+      console.log('delete clicked');
+      event.preventDefault();
+      console.log(getItemIdFromElement(event.currentTarget));
       const id = getItemIdFromElement(event.currentTarget);
-      api.deleteItem(id, () => {
-        store.findAndDelete(id);
-    // render();
-      });
+      console.log(id);
+      let item = store.findById(id);
+      store.deleting = true;
+      if (store.deleting && item.id === id) {
+        api.deleteItem(id, function(response) {
+          store.findAndDelete(response);
+          store.deleting = false;
+          render();
+        });
+      }
     });
   }
 
@@ -128,14 +165,14 @@ const bookmarkList = (function() {
       event.preventDefault();
       const val = $(event.currentTarget).val();
       console.log(val);
-      store.filterByRating(parseInt(val[0]));
+      store.filterByRating(val[0]);
       render();
     });
   }
 
   function getItemIdFromElement(item) {
     return $(item)
-      .closest('.js-bookmark-list-item')
+      .closest('.js-bookmark-list-items')
       .data('item-id');
   }
 
@@ -145,17 +182,12 @@ const bookmarkList = (function() {
    
     if(store.adding) {
       const bookmarkForm = generateCreateBookmarkView();
-      $('.js-bookmark-list').append(bookmarkForm);
-    }
-
-    if(store.expaned) {
-      const expandView = generateExpandedView();
-      $('.js-bookmark-list').append(expandView);
+      $('.js-bookmark-list').prepend(bookmarkForm);
     }
 
     handleAddBookmarkClicked();
 
-
+    handleDeleteBookmarkClicked();
 
     //get current items
     let items = store.items;
@@ -171,9 +203,9 @@ const bookmarkList = (function() {
 
   function bindEventListeners() {
     handleExpandViewClicked();
-    handleDeleteBookmarkClicked();
     handleCreateBookmarkClicked();
     handleFilterByRatingClicked();
+    handleCloseBookmarkClicked();
   }
 
   return {
