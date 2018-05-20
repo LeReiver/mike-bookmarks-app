@@ -5,7 +5,7 @@ const bookmarkList = (function() {
 
   function generateBookmarkElement(item) {
     return `
-      <li class="bookmark-list-items js-bookmark-list-items" data-item-id="${item.id}">
+    <li class="bookmark-list-items js-bookmark-list-items" data-item-id="${item.id}">
       <h3 class="list-title js-list-title">${item.title}</h3>
       <a class="list-link js-list-link" href="${item.url}" target="_blank">${item.url}</a>
       <section class="star-rating js-star-rating">
@@ -92,7 +92,7 @@ const bookmarkList = (function() {
 
 
   function handleCloseBookmarkClicked() {
-    $('#js-close-expanded').on('click', '.js-bookmark-list-item', event => {
+    $('#js-close-expanded').on('click', '.js-bookmark-list-button', event => {
       event.preventDefault();
       console.log(getItemIdFromElement(event.currentTarget));
       const id = getItemIdFromElement(event.currentTarget);
@@ -141,25 +141,20 @@ const bookmarkList = (function() {
 
 
   function handleDeleteBookmarkClicked() {
-    $('#js-delete-bookmark').on('submit', '.js-bookmark-list-item', event => {
+    $('.js-bookmark-list').on('click', '.js-delete-bookmark-button', event => {
+      const ul = event.target.closest('ul');
+      const id = getItemIdFromElement((ul).find('.js-bookmark-list-items'));
       console.log('delete clicked');
       event.preventDefault();
-      console.log(getItemIdFromElement(event.currentTarget));
-      const id = getItemIdFromElement(event.currentTarget);
       console.log(id);
-      let item = store.findById(id);
-      store.deleting = true;
-      if (store.deleting && item.id === id) {
-        api.deleteItem(id, function(response) {
-          store.findAndDelete(response);
-          store.deleting = false;
-          render();
-        });
-      }
+      api.deleteItem(id, () => {
+        store.findAndDelete(id);
+        render();
+      });
     });
   }
 
-
+  
   function handleFilterByRatingClicked() {
     $('.js-header-select').on('change', function(event) {
       event.preventDefault();
