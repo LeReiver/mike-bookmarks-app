@@ -143,7 +143,7 @@ const bookmarkList = (function() {
   function handleDeleteBookmarkClicked() {
     $('.js-bookmark-list').on('click', '.js-delete-bookmark-button', event => {
       const ul = event.target.closest('ul');
-      const id = getItemIdFromElement((ul).find('.js-bookmark-list-items'));
+      const id = getItemIdFromElement(ul, '.js-bookmark-list-items');
       console.log('delete clicked');
       event.preventDefault();
       console.log(id);
@@ -154,7 +154,7 @@ const bookmarkList = (function() {
     });
   }
 
-  
+
   function handleFilterByRatingClicked() {
     $('.js-header-select').on('change', function(event) {
       event.preventDefault();
