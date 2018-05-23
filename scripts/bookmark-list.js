@@ -9,7 +9,7 @@ const bookmarkList = (function() {
       <h3 class="list-title js-list-title">${item.title}</h3>
       <a class="list-link js-list-link" href="${item.url}" target="_blank">${item.url}</a>
       <section class="star-rating js-star-rating">
-        <p class="star-number js-star-number">${item.rating} STARS</p>
+        <p class="star-number js-star-number">${item.rating} STAR</p>
       </section>
     </li>`;
   }
@@ -20,12 +20,11 @@ const bookmarkList = (function() {
   }
 
   function generateExpandedView(item){
-    console.log('Generating Expanded view ran');
     return `
-    <li class="expand-bookmark-view js-expand-bookmark-view">
+    <li class="expand-bookmark-view js-expand-bookmark-view" data-item-id="${item.id}">
       <h2>${item.title}</h2>
       <form id="js-close-expanded" class="header-right js-header-right">
-        <p class="expanded-stars js-expanded-stars">${item.rating} STARS</p>
+      <p class="expanded-stars js-expanded-stars">${item.rating} STAR</p>
         <button class="close-button js-close-button" type="submit">Close</button>
       </form>
       <p class="long-desc js-long-desc">${item.desc}</p>
@@ -60,9 +59,9 @@ const bookmarkList = (function() {
             <Legend required>STARS</Legend>
             <input type="radio" id="5-stars"
               name="rate" value="5" required>
-            <label for="4-stars">5</label>
+            <label for="5-stars">5</label>
             <input type="radio" id="4-stars"
-              name="rate" value="5">
+              name="rate" value="4">
             <label for="4-stars">4</label>
             <input type="radio" id="3-stars"
               name="rate" value="3">
@@ -94,9 +93,7 @@ const bookmarkList = (function() {
   function handleCloseBookmarkClicked() {
     $('#js-close-expanded').on('click', '.js-bookmark-list-button', event => {
       event.preventDefault();
-      console.log(getItemIdFromElement(event.currentTarget));
       const id = getItemIdFromElement(event.currentTarget);
-      console.log(id);
       let item = store.findById(id);
       store.closing = true;
       if (store.closing && item.id === id) {
@@ -133,7 +130,8 @@ const bookmarkList = (function() {
         const expandView = generateExpandedView(item);
         expandView;
         if(store.expanded) {
-          $('.js-bookmark-list').prepend(expandView);
+          $('.js-bookmark-list').show(expandView);
+          //TODO  render expanded view at location of listItem
         }
       }
     });
@@ -142,11 +140,8 @@ const bookmarkList = (function() {
 
   function handleDeleteBookmarkClicked() {
     $('.js-bookmark-list').on('click', '.js-delete-bookmark-button', event => {
-      const ul = event.target.closest('ul');
-      const id = getItemIdFromElement(ul, '.js-bookmark-list-items');
-      console.log('delete clicked');
+      const id = $(event.currentTarget.parentElement.parentElement).data('item-id');
       event.preventDefault();
-      console.log(id);
       api.deleteItem(id, () => {
         store.findAndDelete(id);
         render();
@@ -159,8 +154,10 @@ const bookmarkList = (function() {
     $('.js-header-select').on('change', function(event) {
       event.preventDefault();
       const val = $(event.currentTarget).val();
-      console.log(val);
       store.filterByRating(val[0]);
+      if(val === 1) {
+        store.filterByRating(1);
+      }
       render();
     });
   }
