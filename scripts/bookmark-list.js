@@ -125,14 +125,11 @@ const bookmarkList = (function() {
     $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
       const id = getItemIdFromElement(event.currentTarget);
       let item = store.findById(id);
-      store.expanded = true;
-      if (store.expanded && item.id === id) {
-        const expandView = generateExpandedView(item);
-        expandView;
-        if(store.expanded) {
-          $('.js-bookmark-list').show(expandView);
-          //TODO  render expanded view at location of listItem
-        }
+
+      if(item.id === id) {
+        store.expanded = true;
+        console.log(' expanded = true ');
+        render();
       }
     });
   }
@@ -177,6 +174,14 @@ const bookmarkList = (function() {
       $('.js-bookmark-list').prepend(bookmarkForm);
     }
 
+    if(store.expanded) {
+      const id = getItemIdFromElement(event.currentTarget);
+      let item = store.findById(id);
+      const expandView = generateExpandedView(item);
+      const currentListItem = $('.js-bookmark-list').prev('li');
+      $(currentListItem).prepend(expandView);
+    }
+ 
     handleAddBookmarkClicked();
 
     handleDeleteBookmarkClicked();
