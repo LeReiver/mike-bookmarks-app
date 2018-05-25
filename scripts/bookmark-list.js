@@ -125,6 +125,24 @@ const bookmarkList = (function() {
     $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
       const id = getItemIdFromElement(event.currentTarget);
       let item = store.findById(id);
+      if(item.id === id) {
+        const expandView = generateExpandedView(item);
+        const currentListItem = $('.js-bookmark-list').find('li');
+        const expandedItem = $('.js-bookmark-list').prepend(expandView);
+        $(expandedItem).append(expandView);
+        store.expanded = true;
+        console.log(' expanded = true ');
+        //store.findAndDelete(id);
+        render();
+      }
+    });
+  }
+
+/* 
+  function handleExpandViewClicked() {
+    $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
+      const id = getItemIdFromElement(event.currentTarget);
+      let item = store.findById(id);
       store.expanded = true;
       if (store.expanded && item.id === id) {
         const expandView = generateExpandedView(item);
@@ -136,6 +154,7 @@ const bookmarkList = (function() {
       }
     });
   }
+ */
 
 
   function handleDeleteBookmarkClicked() {
@@ -170,7 +189,7 @@ const bookmarkList = (function() {
 
 
   function render() {
-    $('.js-bookmark-list').empty();
+    //$('.js-bookmark-list').empty();
    
     if(store.adding) {
       const bookmarkForm = generateCreateBookmarkView();
