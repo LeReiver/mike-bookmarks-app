@@ -11,24 +11,27 @@
 </head>
 <body>
   <div class="container">
-    <header role="banner">
-      <h1>My Bookmarks</h1>
+    <header role="banner" aria-live="polite">
+      <h1>My<br>Bookmarks</h1>
       <form id="js-create-bookmark-form">
-        <button role="button" class="header-button js-header-button" type="submit">CREATE BOOKMARK</button>
+        <button class="header-button js-header-button" type="submit">CREATE BOOKMARK</button>
       </form>
       <form id="js-filter-bookmark-form">
-        <select role="select" class="header-select js-header-select">
-          <option role="option" value ="1">Filter By Rating</option>
-          <option role="option" value="5">5 stars</option>
-          <option role="option" value="4">4 stars</option>
-          <option role="option" value="3">3 stars</option>
-          <option role="option" value="2">2 stars</option>
-          <option role="option" value="1">1 star</option>
-          <option role="option" value="1">Show All</option>
-        </select>
+        <fieldset>
+          <legend>Show Only</legend>
+            <label for="rating-filter">
+              <select role="select" class="header-select js-header-select" aria-controls="planetInfo">
+                <option role="option" value="5" id="rating-filter">5 stars</option>
+                <option role="option" value="4" id="rating-filter">4 stars</option>
+                <option role="option" value="3" id="rating-filter">3 stars</option>
+                <option role="option" value="2" id="rating-filter">2 stars</option>
+                <option role="option" value="1" id="rating-filter">1 star</option>
+              </select>
+            </label>
+        </fieldset>
       </form>
-  </header>
-    <main role="main" class="bookmark-panel js-bookmark-panel">
+    </header>
+    <main role="main" class="bookmark-panel js-bookmark-panel" aria-live="polite">
       <ul class="bookmark-list js-bookmark-list">
       </ul>
     </main>

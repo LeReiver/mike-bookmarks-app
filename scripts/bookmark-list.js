@@ -14,10 +14,12 @@ const bookmarkList = (function() {
     </li>`;
   }
 
+
   function generateBookmarkString(bookmarkList) {
     const items = bookmarkList.map((item) => generateBookmarkElement(item));
     return items.join('');
   }
+
 
   function generateExpandedView(item){
     return `
@@ -37,48 +39,52 @@ const bookmarkList = (function() {
         <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">DELETE</button>
       </form>
     </li>`;
-  } 
+  }
 
- 
+
   function generateCreateBookmarkView() {
     return `
-      <li class="create-bookmark-view js-create-bookmark-view">
-      <h2>Create a Bookmark</h2>
-      <form id="js-close-expanded" class="close-header-right js-header-right">
-        <button class="create-close-button js-close-button" type="submit">Close</button>
-      </form>
-      <form id="js-add-bookmark">
-        <label for="add-bookmark-title"></label>
-        <input class="add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title" required>
-        <label for="add-bookmark-desc"></label>
-        <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="longer description here">
-        <label for="add-bookmark-link"></label>
-        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="text"placeholder="http://url-address.com" required>
-        <div id="add-star-rating js-add-star-rating">
-          <div class="rate-radio-button js-rate-radio-buttons" >
-            <Legend required>STARS</Legend>
-            <input type="radio" id="5-stars"
-              name="rate" value="5" required>
-            <label for="5-stars">5</label>
-            <input type="radio" id="4-stars"
-              name="rate" value="4">
-            <label for="4-stars">4</label>
-            <input type="radio" id="3-stars"
-              name="rate" value="3">
-            <label for="3-stars">3</label>
-            <input type="radio" id="2-stars"
-              name="rate" value="2">
-            <label for="2-stars">2</label>
-            <input type="radio" id="1-star"
-              name="rate" value="1">
-            <label for="1-star">1</label>
-          </div>
-        </div>
-        <div>
-          <button class="add-button-submit js-add-button-submit" type="submit">ADD</button>
-        </div>
-      </form>
-    </li>`;
+    <li class="create-bookmark-view js-create-bookmark-view" aria-live="polite">
+        <h2>Create a Bookmark</h2>
+        <label for="close-button">
+          <form id="js-close-expanded" class="close-header-right js-header-right" id="close-button">
+            <button class="create-close-button js-close-button" type="submit">Close</button>
+          </form>
+          <form id="js-add-bookmark">
+            <label for="add-bookmark-title"></label>
+            <input class="add-bookmark add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title" required>
+            <label for="add-bookmark-desc"></label>
+            <input class="add-bookmark add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="longer description here" align="top">
+            <label for="add-bookmark-link"></label>
+            <input class="add-bookmark add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="url" placeholder="http://url-address.com" required>
+            <div id="add-star-rating js-add-star-rating">
+              <div class="add-bookmark rate-radio-button js-rate-radio-buttons">
+                <fieldset>
+                  <Legend required>STARS</Legend>
+                  <input type="radio" id="5-stars"
+                    name="rate" value="5" required>
+                  <label for="5-stars">5</label>
+                  <input type="radio" id="4-stars"
+                    name="rate" value="4">
+                  <label for="4-stars">4</label>
+                  <input type="radio" id="3-stars"
+                    name="rate" value="3">
+                  <label for="3-stars">3</label>
+                  <input type="radio" id="2-stars"
+                    name="rate" value="2">
+                  <label for="2-stars">2</label>
+                  <input type="radio" id="1-star"
+                    name="rate" value="1">
+                  <label for="1-star">1</label>
+                </fieldset>
+              </div>
+            </div>
+            <div>
+              <button class="add-button-submit js-add-button-submit" type="submit">ADD</button>
+            </div>
+          </form>
+        </label>
+      </li>`;
   }
 
 
@@ -164,10 +170,12 @@ const bookmarkList = (function() {
         let items = store.items;
         const bookmarkString = generateBookmarkString(items);
         $('.js-bookmark-list').append(bookmarkString);
+        store.filterByRating(val);
       }
       render();
     });
   }
+
 
   function getItemIdFromElement(item) {
     return $(item)
@@ -198,6 +206,7 @@ const bookmarkList = (function() {
     $('.js-bookmark-list').append(bookmarkString);
 
   }
+
 
   function bindEventListeners() {
     handleExpandViewClicked();
