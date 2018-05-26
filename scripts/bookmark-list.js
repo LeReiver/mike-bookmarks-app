@@ -53,7 +53,7 @@ const bookmarkList = (function() {
         <label for="add-bookmark-desc"></label>
         <input class="add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="longer description here">
         <label for="add-bookmark-link"></label>
-        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="text"placeholder="http://url-address.com" requried>
+        <input class="add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="text"placeholder="http://url-address.com" required>
         <div id="add-star-rating js-add-star-rating">
           <div class="rate-radio-button js-rate-radio-buttons" >
             <Legend required>STARS</Legend>
@@ -80,6 +80,7 @@ const bookmarkList = (function() {
       </form>
     </li>`;
   }
+
 
   function handleCreateBookmarkClicked() {
     $('#js-create-bookmark-form').on('submit', (function(event) {
@@ -125,36 +126,20 @@ const bookmarkList = (function() {
     $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
       const id = getItemIdFromElement(event.currentTarget);
       let item = store.findById(id);
+      $(event.currentTarget).remove();
       if(item.id === id) {
         const expandView = generateExpandedView(item);
-        const currentListItem = $('.js-bookmark-list').find('li');
+        //const currentListItem = $('.js-bookmark-list').find('li'); // not being used
         const expandedItem = $('.js-bookmark-list').prepend(expandView);
-        $(expandedItem).append(expandView);
+        //$(expandedItem).append(expandView);
         store.expanded = true;
+
         console.log(' expanded = true ');
         //store.findAndDelete(id);
-        render();
+        //render();
       }
     });
   }
-
-/* 
-  function handleExpandViewClicked() {
-    $('.js-bookmark-list').on('click', '.js-bookmark-list-items', event => {
-      const id = getItemIdFromElement(event.currentTarget);
-      let item = store.findById(id);
-      store.expanded = true;
-      if (store.expanded && item.id === id) {
-        const expandView = generateExpandedView(item);
-        expandView;
-        if(store.expanded) {
-          $('.js-bookmark-list').show(expandView);
-          //TODO  render expanded view at location of listItem
-        }
-      }
-    });
-  }
- */
 
 
   function handleDeleteBookmarkClicked() {
@@ -173,9 +158,12 @@ const bookmarkList = (function() {
     $('.js-header-select').on('change', function(event) {
       event.preventDefault();
       const val = $(event.currentTarget).val();
-      store.filterByRating(val[0]);
+      store.filterByRating(val);
       if(val === 1) {
-        store.filterByRating(1);
+        // TODO: filter - show all
+        let items = store.items;
+        const bookmarkString = generateBookmarkString(items);
+        $('.js-bookmark-list').append(bookmarkString);
       }
       render();
     });
@@ -189,7 +177,7 @@ const bookmarkList = (function() {
 
 
   function render() {
-    //$('.js-bookmark-list').empty();
+    $('.js-bookmark-list').empty();
    
     if(store.adding) {
       const bookmarkForm = generateCreateBookmarkView();
@@ -202,7 +190,6 @@ const bookmarkList = (function() {
 
     //get current items
     let items = store.items;
-    //console.log(items);
 
     // create element string
     const bookmarkString = generateBookmarkString(items);
