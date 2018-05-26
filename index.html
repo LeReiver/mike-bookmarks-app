@@ -12,15 +12,16 @@
 <body>
   <div class="container">
     <header role="banner" aria-live="polite">
-      <h1>My<br>Bookmarks</h1>
+      <a href="index.html"><h1>My<br>Bookmarks</h1></a>
       <form id="js-create-bookmark-form">
         <button class="header-button js-header-button" type="submit">CREATE A BOOKMARK</button>
       </form>
       <form id="js-filter-bookmark-form" class="filter-bookmark-form">
         <fieldset>
-          <legend>Show Only</legend>
+          <legend>Filter By</legend>
             <label for="rating-filter">
               <select role="select" class="header-select js-header-select" aria-controls="planetInfo">
+                <option role="option" value="1" id="rating-filter">Rating</option>
                 <option role="option" value="5" id="rating-filter">5 stars</option>
                 <option role="option" value="4" id="rating-filter">4 stars</option>
                 <option role="option" value="3" id="rating-filter">3 stars</option>

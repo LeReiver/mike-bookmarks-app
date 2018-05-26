@@ -54,7 +54,7 @@ const bookmarkList = (function() {
             <label for="add-bookmark-title"></label>
             <input class="add-bookmark add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title" required>
             <label for="add-bookmark-link"></label>
-            <input class="add-bookmark add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="url" placeholder="http://url-address.com" required>
+            <input class="add-bookmark add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="url" value="http://" placeholder="http://url-address.com" required>
             <label for="add-bookmark-desc"></label>
             <input class="add-bookmark add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="Add long description here" align="top">
             <div id="add-star-rating js-add-star-rating">
