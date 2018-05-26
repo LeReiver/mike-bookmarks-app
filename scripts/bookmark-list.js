@@ -135,14 +135,8 @@ const bookmarkList = (function() {
       $(event.currentTarget).remove();
       if(item.id === id) {
         const expandView = generateExpandedView(item);
-        //const currentListItem = $('.js-bookmark-list').find('li'); // not being used
-        const expandedItem = $('.js-bookmark-list').prepend(expandView);
-        //$(expandedItem).append(expandView);
+        $('.js-bookmark-list').prepend(expandView);
         store.expanded = true;
-
-        console.log(' expanded = true ');
-        //store.findAndDelete(id);
-        //render();
       }
     });
   }
@@ -165,13 +159,6 @@ const bookmarkList = (function() {
       event.preventDefault();
       const val = $(event.currentTarget).val();
       store.filterByRating(val);
-      if(val === 1) {
-        // TODO: filter - show all
-        let items = store.items;
-        const bookmarkString = generateBookmarkString(items);
-        $('.js-bookmark-list').append(bookmarkString);
-        store.filterByRating(val);
-      }
       render();
     });
   }
