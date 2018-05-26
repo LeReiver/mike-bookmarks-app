@@ -217,7 +217,7 @@ p.expanded-stars {
 a.bookmark-link {
   padding: 8px;
   margin-top: 20px;
-  word-wrap: none;
+  word-break: none;
 }
 .visit-site-button {
   width: 40%;
