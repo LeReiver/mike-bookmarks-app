@@ -24,6 +24,10 @@ h2 {
   font-size: 120%;
 }
 
+h3 {
+  font-size: 120%;
+}
+
 header form {
   margin: 35px 0 0 15px;
   float: left;
@@ -91,11 +95,11 @@ button.js-header-button {
   width: 95%;
   min-width: 200px;
   height: fit-content;
-  margin: 8px auto;
+  margin: 12px auto;
   background-color: white;
   border: solid 2px rgb(31, 52, 65);
   border-radius: 5px;
-  padding: 4%;
+  padding: 1%;
 }
 
 .bookmark-list-items:hover, 
@@ -107,11 +111,11 @@ select:hover {
 }
 
 .list-title, a.bookmark-link, .star-rating {
-  margin: 15px;
+  margin: 10px;
 }
 
 a.list-link {
-  margin: 0;
+  margin-top: 10px;
   word-break: break-all;
   width: 40%;
   padding: 0;
