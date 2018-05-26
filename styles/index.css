@@ -109,6 +109,12 @@ select:hover {
   padding: 8px;
 }
 
+.list-link {
+  text-overflow: ellipsis;
+  padding-right: 6%;
+  word-break: break-all;
+}
+
 .create-bookmark-view {
   clear: left;
   width: 95%;
@@ -132,25 +138,23 @@ select:hover {
   width: 47%;
 }
 
-
-
 .add-bookmark {
   border: black;
 }
 
 .add-bookmark-title, 
 .add-bookmark-link {
+  width: 95%;
   height: 45px;
   margin-top: 5px;
-  clear: right;
   border: solid 1px rgb(31, 52, 65);;
 }
 
 .add-bookmark-desc {
-  margin-top: -50px;
+  width: 95%;
   height: 100px;
-  float: right;
-  border: solid 1px rgb(31, 52, 65);;
+  border: solid 1px rgb(31, 52, 65);
+  word-wrap: break-word;
 }
 
 .add-button-submit {
@@ -231,21 +235,11 @@ a.bookmark-link {
   .container {
     margin: 4%;
   }
-.add-bookmark-desc {
-  margin-top: 0px;
-}
 
- .add-bookmark, .add-button-submit {
+  .rate-radio-button, .add-button-submit {
     float: none;
-    width: 80%;
+    width: 95%;
     margin-top: 10px;
-  }
-
-  .list-link {
-    text-overflow: ellipsis;
-    padding-right: 6%;
-    word-break: break-word;
-}
   }
 
 }
