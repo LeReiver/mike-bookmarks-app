@@ -84,6 +84,7 @@ a:hover {
 button.js-header-button {
   height: 60px;
   width: 160px;
+  background-color: white;
 }
 
 .bookmark-panel {
