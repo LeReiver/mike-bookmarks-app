@@ -95,6 +95,7 @@ button.js-header-button {
   background-color: white;
   border: solid 2px rgb(31, 52, 65);
   border-radius: 5px;
+  padding: 4%;
 }
 
 .bookmark-list-items:hover, 
@@ -105,14 +106,15 @@ select:hover {
   border: solid 2px white;
 }
 
-.list-title, .list-link, .star-rating{
-  padding: 8px;
+.list-title, a.bookmark-link, .star-rating {
+  margin: 15px;
 }
 
-.list-link {
-  text-overflow: ellipsis;
-  padding-right: 6%;
+a.list-link {
+  margin: 0;
   word-break: break-all;
+  width: 40%;
+  padding: 0;
 }
 
 .create-bookmark-view {
@@ -188,6 +190,7 @@ select:hover {
 .header-right {
   float: right;
 }
+
 p.expanded-stars {
   margin-top: -10px;
   margin-right: 10px;
@@ -232,6 +235,10 @@ a.bookmark-link {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
+  h2 {
+    margin-bottom: 40px;
+  }
+
   .container {
     margin: 4%;
   }
@@ -240,6 +247,36 @@ a.bookmark-link {
     float: none;
     width: 95%;
     margin-top: 10px;
+  }
+  .header-right {
+    float: none;
+    margin-top: 20px;
+  }
+  p.expanded-stars {
+    float: left;
+    width: 45%;
+  }
+
+  .close-button {
+    float: left;
+    width: 45%;
+    margin-bottom: 20px;
+  }
+
+  .visit-site-button, 
+  .delete-bookmark-button {
+    width: 95%;
+    float: none;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .visit-site-button {
+    margin-left: -20px;
+  }
+
+  a.bookmark-link {
+    word-break: break-all;
   }
 
 }
