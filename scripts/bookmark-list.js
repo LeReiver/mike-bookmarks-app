@@ -5,11 +5,11 @@ const bookmarkList = (function() {
 
   function generateBookmarkElement(item) {
     return `
-    <li class="bookmark-list-items js-bookmark-list-items" data-item-id="${item.id}">
+    <li class="bookmark-list-items js-bookmark-list-items" data-item-id="${item.id}" aria-label="click to expand bookmark item">
       <h3 class="list-title js-list-title">${item.title}</h3>
       <a class="list-link js-list-link" href="${item.url}" target="_blank">${item.url}</a>
       <section class="star-rating js-star-rating">
-        <p class="star-number js-star-number">${item.rating} STAR</p>
+        <p class="star-number js-star-number" aria-label="${item.rating} star">${item.rating} STAR</p>
       </section>
     </li>`;
   }
@@ -23,22 +23,22 @@ const bookmarkList = (function() {
 
   function generateExpandedView(item){
     return `
-    <li class="expand-bookmark-view js-expand-bookmark-view" data-item-id="${item.id}">
-      <h2>${item.title}</h2>
-      <form id="js-close-expanded" class="header-right js-header-right">
-      <p class="expanded-stars js-expanded-stars">${item.rating} STAR</p>
-        <button class="close-button js-close-button" type="submit">Close</button>
-      </form>
-      <p class="long-desc js-long-desc">${item.desc}</p>
-      <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">${item.url}</a>
-      <div> 
-          <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">
-          <button class="visit-site-button js-visit-site-button">VISIT</button></a>
-      </div>
-      <form id="js-delete-bookmark">
-        <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">DELETE</button>
-      </form>
-    </li>`;
+      <li aria-label="click to expand bookmark"class="expand-bookmark-view js-expand-bookmark-view" data-item-id="${item.id}">
+        <h2>${item.title}</h2>
+        <form id="js-close-expanded" class="header-right js-header-right">
+        <p class="expanded-stars js-expanded-stars">${item.rating} STAR</p>
+          <button class="close-button js-close-button" type="submit" aria-label="click to close ${item.title} expanded view">Close</button>
+        </form>
+        <p class="long-desc js-long-desc">${item.desc}</p>
+        <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">${item.url}</a>
+        <div> 
+            <a class="bookmark-link js-bookmark-link" href="${item.url}" target="_blank">
+            <button class="visit-site-button js-visit-site-button" aria-label="click to visit ${item.title} website">VISIT</button></a>
+        </div>
+        <form id="js-delete-bookmark">
+          <button class="delete-bookmark-button js-delete-bookmark-button" type="submit" aria-label="click to delete ${item.title} website">DELETE</button>
+        </form>
+      </li>`;
   }
 
 
@@ -48,39 +48,39 @@ const bookmarkList = (function() {
         <h2>Create a Bookmark</h2>
         <label for="close-button">
           <form id="js-close-expanded" class="close-header-right js-header-right" id="close-button">
-            <button class="create-close-button js-close-button" type="submit">Close</button>
+            <button class="create-close-button js-close-button" type="submit" aria-label="click to close expanded view">Close</button>
           </form>
           <form id="js-add-bookmark">
             <label for="add-bookmark-title"></label>
-            <input class="add-bookmark add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title" required>
+            <input class="add-bookmark add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="title" required aria-label="please enter a name for your bookmark">
             <label for="add-bookmark-link"></label>
-            <input class="add-bookmark add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="url" value="http://" placeholder="http://url-address.com" required>
+            <input class="add-bookmark add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="url" aria-label="please enter a url for your bookmark"value="http://" placeholder="http://url-address.com" required>
             <label for="add-bookmark-desc"></label>
-            <input class="add-bookmark add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="Add long description here" align="top">
+            <input class="add-bookmark add-bookmark-desc js-add-bookmark-desc" id="add-bookmark-desc" name="desc" type="text" placeholder="Add long description here" aria-label="please enter a long description for your bookmark"align="top">
             <div id="add-star-rating js-add-star-rating">
-              <div class="add-bookmark rate-radio-button js-rate-radio-buttons">
+              <div class="add-bookmark rate-radio-button js-rate-radio-buttons" aria-label="please select rating for new bookmark">
                 <fieldset>
                   <Legend required>STARS</Legend>
+                  <label aria-label="select rating 5 star"for="5-stars">5</label>
                   <input type="radio" id="5-stars"
                     name="rate" value="5" required>
-                  <label for="5-stars">5</label>
+                  <label aria-label="select rating 4 star"for="4-stars">4</label>
                   <input type="radio" id="4-stars"
                     name="rate" value="4">
-                  <label for="4-stars">4</label>
+                  <label aria-label="select rating 3 star"for="3-stars">3</label>
                   <input type="radio" id="3-stars"
                     name="rate" value="3">
-                  <label for="3-stars">3</label>
+                  <label aria-label="select rating 2 star"for="2-stars">2</label>
                   <input type="radio" id="2-stars"
                     name="rate" value="2">
-                  <label for="2-stars">2</label>
+                  <label aria-label="select rating 1 star"for="1-stars">1</label>
                   <input type="radio" id="1-star"
                     name="rate" value="1">
-                  <label for="1-star">1</label>
                 </fieldset>
               </div>
             </div>
             <div>
-              <button class="add-button-submit js-add-button-submit" type="submit">ADD</button>
+              <button class="add-button-submit js-add-button-submit" type="submit" aria-label="click to add bookmark">ADD</button>
             </div>
           </form>
         </label>
